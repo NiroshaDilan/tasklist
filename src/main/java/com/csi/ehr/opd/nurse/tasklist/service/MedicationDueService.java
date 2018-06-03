@@ -1,6 +1,9 @@
 package com.csi.ehr.opd.nurse.tasklist.service;
 
+import com.csi.ehr.opd.nurse.tasklist.dto.MedicationDueDTO;
 import com.csi.ehr.opd.nurse.tasklist.entity.MedicationDue;
+
+import java.util.List;
 
 /**
  * @Project task-list
@@ -8,5 +11,11 @@ import com.csi.ehr.opd.nurse.tasklist.entity.MedicationDue;
  */
 public interface MedicationDueService {
 
-    MedicationDue findByPrescriptionNo(Integer prescriptionNo);
+    MedicationDueDTO findByPrescriptionNo(Integer prescriptionNo);
+
+    List<MedicationDueDTO> getAll();
+
+    void add(MedicationDueDTO medicationDueDTO);
+
+    void addAll(List<MedicationDueDTO> medicationDueDTOList);
 }

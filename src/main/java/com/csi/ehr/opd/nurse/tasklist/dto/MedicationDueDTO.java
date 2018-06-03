@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Project task-list
  * @Author DILAN on 6/2/2018
  */
-public class MedicationDTO extends BaseDTO {
+public class MedicationDueDTO extends BaseDTO {
 
     @ApiModelProperty(value = "Prescription No")
     private Integer prescriptionNo;
@@ -41,7 +41,7 @@ public class MedicationDTO extends BaseDTO {
 
     @Override
     public String toString() {
-        return "MedicationDTO{" +
+        return "MedicationDueDTO{" +
                 "prescriptionNo=" + prescriptionNo +
                 ", medication='" + medication + '\'' +
                 ", dosageDetail='" + dosageDetail + '\'' +

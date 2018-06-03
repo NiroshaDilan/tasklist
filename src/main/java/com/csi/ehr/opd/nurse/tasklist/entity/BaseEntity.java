@@ -1,10 +1,14 @@
 package com.csi.ehr.opd.nurse.tasklist.entity;
 
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -12,6 +16,7 @@ import java.util.Date;
  * @Author DILAN on 6/2/2018
  */
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 
     @Id
@@ -24,9 +29,10 @@ public abstract class BaseEntity implements Serializable {
     @CreatedDate
     private Date createdOn;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private Date lastModifiedDate;
+    @Column(nullable = false)
+    private LocalDateTime modified;
+
     private Integer rowActiveStatus;
 
     public Long getId() {
@@ -53,12 +59,12 @@ public abstract class BaseEntity implements Serializable {
         this.createdOn = createdOn;
     }
 
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
+    public LocalDateTime getModified() {
+        return modified;
     }
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
+    public void setModified(LocalDateTime modified) {
+        this.modified = modified;
     }
 
     public Integer getRowActiveStatus() {

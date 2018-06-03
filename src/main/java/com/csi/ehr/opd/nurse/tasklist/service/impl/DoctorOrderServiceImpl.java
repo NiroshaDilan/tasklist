@@ -1,8 +1,14 @@
 package com.csi.ehr.opd.nurse.tasklist.service.impl;
 
+import com.csi.ehr.opd.nurse.tasklist.dto.DoctorOrderDTO;
+import com.csi.ehr.opd.nurse.tasklist.entity.DoctorOrder;
 import com.csi.ehr.opd.nurse.tasklist.repository.DoctorOrderRepository;
 import com.csi.ehr.opd.nurse.tasklist.service.DoctorOrderService;
+import com.csi.ehr.opd.nurse.tasklist.util.Mapper;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Project task-list
@@ -17,4 +23,25 @@ public class DoctorOrderServiceImpl implements DoctorOrderService {
         this.doctorOrderRepository = doctorOrderRepository;
     }
 
+    @Override
+    public List<DoctorOrderDTO> getAll() {
+        List<DoctorOrder> doctorOrderList = doctorOrderRepository.findAll();
+        List<DoctorOrderDTO> doctorOrderDTOList = new ArrayList<>();
+        doctorOrderList.forEach(doctorOrder -> doctorOrderDTOList
+                .add(Mapper.doctorOrderToDtoMap(doctorOrder)));
+        return doctorOrderDTOList;
+    }
+
+    @Override
+    public void add(DoctorOrderDTO doctorOrderDTO) {
+        doctorOrderRepository.save(Mapper.dtoToDoctorOrderMap(doctorOrderDTO));
+    }
+
+    @Override
+    public void addAll(List<DoctorOrderDTO> doctorOrderDTOList) {
+        List<DoctorOrder> doctorOrderList = new ArrayList<>();
+        doctorOrderDTOList.forEach(doctorOrderDTO -> doctorOrderList
+                .add(Mapper.dtoToDoctorOrderMap(doctorOrderDTO)));
+        doctorOrderRepository.saveAll(doctorOrderList);
+    }
 }

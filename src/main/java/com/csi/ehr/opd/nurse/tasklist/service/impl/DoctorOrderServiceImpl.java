@@ -36,7 +36,7 @@ public class DoctorOrderServiceImpl implements DoctorOrderService {
     }
 
     @Override
-    public void add(DoctorOrderDTO doctorOrderDTO) throws DoctorOrderException {
+    public void add(DoctorOrderDTO doctorOrderDTO){
         StringBuilder errorFields = new StringBuilder();
 
         errorFields.append(ValidatorUtil.notNullString.and(ValidatorUtil.notEmptyString)

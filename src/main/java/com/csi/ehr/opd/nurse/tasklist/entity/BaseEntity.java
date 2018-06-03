@@ -19,9 +19,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private Long appointmentId;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,14 +31,6 @@ public abstract class BaseEntity implements Serializable {
     private LocalDateTime modified;
 
     private Integer rowActiveStatus;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getAppointmentId() {
         return appointmentId;

@@ -1,5 +1,9 @@
 package com.csi.ehr.opd.nurse.tasklist.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * @Project task-list
  * @Author DILAN on 6/2/2018

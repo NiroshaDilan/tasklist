@@ -2,10 +2,13 @@ package com.csi.ehr.opd.nurse.tasklist.service.impl;
 
 import com.csi.ehr.opd.nurse.tasklist.dto.DoctorOrderDTO;
 import com.csi.ehr.opd.nurse.tasklist.entity.DoctorOrder;
+import com.csi.ehr.opd.nurse.tasklist.exception.DoctorOrderException;
+import com.csi.ehr.opd.nurse.tasklist.genericvalidator.ValidatorUtil;
 import com.csi.ehr.opd.nurse.tasklist.repository.DoctorOrderRepository;
 import com.csi.ehr.opd.nurse.tasklist.service.DoctorOrderService;
 import com.csi.ehr.opd.nurse.tasklist.util.Mapper;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.ValidationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,13 @@ public class DoctorOrderServiceImpl implements DoctorOrderService {
     }
 
     @Override
-    public void add(DoctorOrderDTO doctorOrderDTO) {
+    public void add(DoctorOrderDTO doctorOrderDTO) throws DoctorOrderException {
+        StringBuilder errorFields = new StringBuilder();
+
+        errorFields.append(ValidatorUtil.notNullString.and(ValidatorUtil.notEmptyString)
+                .test(doctorOrderDTO.getDoctorOrder())
+                .getFieldNameIfInvalid("Please Doctor Order Cannot be empty").orElse(""));
+
         doctorOrderRepository.save(Mapper.dtoToDoctorOrderMap(doctorOrderDTO));
     }
 

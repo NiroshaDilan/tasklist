@@ -1,11 +1,16 @@
 package com.csi.ehr.opd.nurse.tasklist.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * @Project task-list
  * @Author DILAN on 6/2/2018
  */
 public class DoctorOrderDTO extends BaseDTO {
 
+    @NotEmpty(message = "Doctor Order should not be empty")
+    @NotNull(message = "Doctor Order should not be null")
     private String doctorOrder;
     private Integer status;
     private Integer performed;

@@ -8,7 +8,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -38,9 +41,12 @@ public class DoctorOrderController {
 
     @ApiOperation(value = "create", notes = "Save Doctor Orders")
     @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody DoctorOrderDTO doctorOrderDTO) {
+    public ResponseEntity<Object> create(@Valid @RequestBody DoctorOrderDTO doctorOrderDTO) {
         doctorOrderService.add(doctorOrderDTO);
-        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.CREATED);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(doctorOrderDTO.getId()).toUri();
+        return ResponseEntity.created(location).build();
+//        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "add All", notes = "Save all doctor Orders")

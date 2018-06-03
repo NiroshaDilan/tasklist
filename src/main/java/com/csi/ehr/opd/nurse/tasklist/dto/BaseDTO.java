@@ -17,8 +17,8 @@ public abstract class BaseDTO implements Serializable {
     private Long appointmentId;
 //    @ApiModelProperty(value = "Created On")
 //    private Date createdOn;
-//    @ApiModelProperty(value = "Last Modified Date")
-//    private Date lastModifiedDate;
+    @ApiModelProperty(value = "Last Modified Date")
+    private Date lastModifiedDate;
     @ApiModelProperty(value = "Active Row Status")
     private Integer rowActiveStatus;
 
@@ -46,13 +46,13 @@ public abstract class BaseDTO implements Serializable {
 //        this.createdOn = createdOn;
 //    }
 
-//    public Date getLastModifiedDate() {
-//        return lastModifiedDate;
-//    }
-//
-//    public void setLastModifiedDate(Date lastModifiedDate) {
-//        this.lastModifiedDate = lastModifiedDate;
-//    }
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 
     public Integer getRowActiveStatus() {
         return rowActiveStatus;
